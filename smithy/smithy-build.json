@@ -1,0 +1,13 @@
+{
+  "version": "1.0",
+  "plugins": {
+    "typescript-codegen": {
+      "package": "@stackspotlabs/incident-client",
+      "packageVersion": "0.0.1"
+    },
+    "java-server-codegen": {
+      "service": "com.stackspot.labs#IncidentHub",
+      "namespace": "com.stackspot.labs"
+    }
+  }
+}
