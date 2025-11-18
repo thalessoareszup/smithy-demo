@@ -28,8 +28,8 @@ function IncidentForm({ onCreate }: IncidentFormProps) {
                 onChange={e => setDescription(e.target.value)}
                 disabled={submitting}
             />
-            <button type="submit" disabled={submitting || !description.trim()}>
-                {submitting ? 'Creating...' : 'Create Incident'}
+            <button type="submit" disabled={submitting || !description.trim()} style={{margin: '2px'}}>
+                {submitting ? 'Sending...' : 'Send'}
             </button>
         </form>
     );
@@ -69,17 +69,28 @@ function App() {
 
     return (
         <>
-            <h1>Incident App</h1>
-            <IncidentForm onCreate={handleCreateIncident} />
-            {loading && <p>Loading incidents...</p>}
-            {error && <p style={{ color: 'red' }}>{error}</p>}
-            <ul>
-                {incidents.map((incident: any) => (
-                    <li key={incident.id}>
-                        <strong>{incident.id}</strong>: {incident.description} ({incident.status})
-                    </li>
-                ))}
-            </ul>
+            <header><h1>Incident App</h1></header>
+            <main>
+                <section className="form-section">
+                    <h2>Report Incident</h2>
+                    <IncidentForm onCreate={handleCreateIncident} />
+                </section>
+                <section className="list-section">
+                    {loading && <p>Loading incidents...</p>}
+                    {error && <p style={{ color: 'red' }}>{error}</p>}
+                    {incidents.length === 0 ? (
+                        <p>No incidents found</p>
+                    ) : (
+                        <ul className="incident-list">
+                            {incidents.map((incident) => (
+                                <li className="incident-card" key={incident.id}>
+                                    <strong>{incident.id}</strong>: {incident.description} ({incident.status})
+                                </li>
+                            ))}
+                        </ul>
+                    )}
+                </section>
+            </main>
         </>
     );
 }
